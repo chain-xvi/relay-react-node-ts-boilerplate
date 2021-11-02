@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "es2020",
+    "target": "ES6",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false,
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "lib":[
+      "es2019",
+      "dom"
+    ]
+  },
+  "exclude":[
+    "node_modules/**/*",
+  ]
+}
