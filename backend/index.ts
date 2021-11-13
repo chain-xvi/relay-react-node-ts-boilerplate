@@ -5,10 +5,16 @@ const cors = require('cors');
 const app = express();
 const graphqlHTTP = require('express-graphql').graphqlHTTP;
 const expressPlayground = require('graphql-playground-middleware-express').default;
-const { run } = require('./db-connection');
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { join } from 'path';
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.DB);
+
+mongoose.connection.once('open', () => {
+  console.log('conneted to database');
+});
 
 // GraphQL resolvers
 const resolvers = require('./graphql/resolvers');
@@ -16,7 +22,6 @@ const resolvers = require('./graphql/resolvers');
 // GraphQL schema
 const schema = loadSchemaSync(join(__dirname, '/graphql/schema.graphql'), { loaders: [new GraphQLFileLoader()] });
 
-run().catch(console.dir);
 app.use(cors());
 
 // a great gql playground
@@ -27,7 +32,7 @@ app.use(
   '/graphql',
   graphqlHTTP({
     schema,
-    rootValue: {resolvers},
+    rootValue: resolvers,
     graphiql: true,
     pretty: true
   })
