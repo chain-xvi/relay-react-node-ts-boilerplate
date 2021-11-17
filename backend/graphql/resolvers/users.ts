@@ -1,14 +1,30 @@
-import {UserModel, UserType} from '../../models/user';
+import { IResolvers } from '@graphql-tools/utils';
+
+import {MutationCreateUserArgs, Query, User, Mutation,} from '../generated';
 
 // todo: extensive gql typing for the resolvers.
+export const UserResolvers: IResolvers = {
+	getUsers(_: void, args: {}): Array<User> {
+		return [
+			{
+				id: 'ijaidjiaowjd',
+				_id: 0,
+				name: 'Anas'
+			}
+		]
+	},
+	// async createUser(_:void, args: MutationCreateUserArgs): Promise<User>{
+	// 	const data = await knex('users')
+	// 	.returning('_id')
+	// 	.insert(
+	// 		{
+	// 			name: args.name,
+	// 		}, ''
+	// 	);
 
-module.exports = {
-	getUsers: function () {
-		const users = UserModel.find();
-		return users;
-	},
-	createUser: function (args: {name: string}) {
-		const rec = UserModel.create({name: args.name});
-    return rec;
-	},
-};
+	// 	return {
+	// 		id: data[0],
+	// 		status: 'creating'
+	// 	}
+	// }
+}

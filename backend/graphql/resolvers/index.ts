@@ -1,6 +1,7 @@
-const users = require('./users');
-const resolvers = {
-	...users
-};
+import { IResolvers } from '@graphql-tools/utils';
+import { merge } from 'lodash';
+import { UserResolvers } from './users';
 
-module.exports = resolvers;
+const resolvers: IResolvers = merge(UserResolvers);
+
+export default resolvers;

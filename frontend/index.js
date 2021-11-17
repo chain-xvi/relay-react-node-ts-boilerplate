@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDom from "react-dom"
-import App from './app.tsx';
+import App from './index.tsx';
 
 ReactDom.render(
 	<App />,

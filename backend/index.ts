@@ -8,16 +8,9 @@ const expressPlayground = require('graphql-playground-middleware-express').defau
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { join } from 'path';
-const mongoose = require('mongoose');
-
-mongoose.connect(process.env.DB);
-
-mongoose.connection.once('open', () => {
-  console.log('conneted to database');
-});
 
 // GraphQL resolvers
-const resolvers = require('./graphql/resolvers');
+import resolvers from './graphql/resolvers';
 
 // GraphQL schema
 const schema = loadSchemaSync(join(__dirname, '/graphql/schema.graphql'), { loaders: [new GraphQLFileLoader()] });
@@ -43,4 +36,6 @@ app.get('/', (req: Request, res: Response) => {
   res.send('<h1>API is up and up only!</h1>');
 });
 
-app.listen(process.env.PORT || 3000);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`App is up, and up only at ${PORT}`));
