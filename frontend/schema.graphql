@@ -1,13 +1,19 @@
 type Query {
-	getUsers: [User!]!
+  getUsers: [User!]!
+}
+
+type User implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
 }
 
 type Mutation {
-	createUser(name: String!): User!
-}
-
-type User {
-	id: String!
-	_id: String!
-	name: String!
+  createUser(name: String): User!
 }
