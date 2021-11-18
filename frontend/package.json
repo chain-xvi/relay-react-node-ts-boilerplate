@@ -16,7 +16,7 @@
   "scripts": {
     "watch": "webpack serve --mode development",
     "build": "webpack --mode production",
-    "relay": "relay-compiler --src ./assets --schema schema.graphql --language typescript --watch"
+    "relay": "relay-compiler --src ./assets --schema schema.graphql --language typescript"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
