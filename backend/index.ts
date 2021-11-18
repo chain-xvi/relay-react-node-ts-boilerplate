@@ -8,14 +8,27 @@ const expressPlayground = require('graphql-playground-middleware-express').defau
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { join } from 'path';
-
-// GraphQL resolvers
-import resolvers from './graphql/resolvers';
-
 // GraphQL schema
-const schema = loadSchemaSync(join(__dirname, '/graphql/schema.graphql'), { loaders: [new GraphQLFileLoader()] });
+import {schema} from './graphql';
 
 app.use(cors());
+
+const fs = require('fs');
+const graphql = require('graphql');
+const schemaPath = '../frontend/schema.graphql';
+const schemaString = graphql.printSchema(schema);
+let oldSchemaString;
+try {
+  oldSchemaString = fs.readFileSync(schemaPath);
+} catch (e) {}
+
+if(schemaString !== oldSchemaString){
+  fs.writeFileSync(
+    schemaPath,
+    schemaString
+  );
+  console.log('schema updated!');
+}
 
 // a great gql playground
 app.get('/gql', expressPlayground({ endpoint: '/graphql' }));
@@ -25,7 +38,6 @@ app.use(
   '/graphql',
   graphqlHTTP({
     schema,
-    rootValue: resolvers,
     graphiql: true,
     pretty: true
   })
