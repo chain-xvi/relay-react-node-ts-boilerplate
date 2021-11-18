@@ -24,6 +24,7 @@ function UsersList() {
 		graphql`
 			query homeUsersQuery{
 				getUsers{
+					id
 					name
 				}
 			}
@@ -37,7 +38,7 @@ function UsersList() {
 				users.map(
 					function(user) {
 						return (
-							<div className="user">
+							<div className="user" key={user.id}>
 								{user.name}
 							</div>
 						)

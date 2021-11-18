@@ -7,6 +7,7 @@ import { ConcreteRequest } from "relay-runtime";
 export type homeUsersQueryVariables = {};
 export type homeUsersQueryResponse = {
     readonly getUsers: ReadonlyArray<{
+        readonly id: string;
         readonly name: string | null;
     }>;
 };
@@ -20,40 +21,47 @@ export type homeUsersQuery = {
 /*
 query homeUsersQuery {
   getUsers {
-    name
     id
+    name
   }
 }
 */
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-};
+var v0 = [
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "User",
+    "kind": "LinkedField",
+    "name": "getUsers",
+    "plural": true,
+    "selections": [
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "name",
+        "storageKey": null
+      }
+    ],
+    "storageKey": null
+  }
+];
 return {
   "fragment": {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
     "name": "homeUsersQuery",
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "User",
-        "kind": "LinkedField",
-        "name": "getUsers",
-        "plural": true,
-        "selections": [
-          (v0/*: any*/)
-        ],
-        "storageKey": null
-      }
-    ],
+    "selections": (v0/*: any*/),
     "type": "Query",
     "abstractKey": null
   },
@@ -62,37 +70,17 @@ return {
     "argumentDefinitions": [],
     "kind": "Operation",
     "name": "homeUsersQuery",
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "User",
-        "kind": "LinkedField",
-        "name": "getUsers",
-        "plural": true,
-        "selections": [
-          (v0/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "id",
-            "storageKey": null
-          }
-        ],
-        "storageKey": null
-      }
-    ]
+    "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "2971b01754a69cf5c81991ad59fec225",
+    "cacheID": "3927e8734b02bf085ba0e6afac42e399",
     "id": null,
     "metadata": {},
     "name": "homeUsersQuery",
     "operationKind": "query",
-    "text": "query homeUsersQuery {\n  getUsers {\n    name\n    id\n  }\n}\n"
+    "text": "query homeUsersQuery {\n  getUsers {\n    id\n    name\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '2f3df39835a564899338235c4643dfde';
+(node as any).hash = '8c461b1ae9ccc1f7c12083d239d8db6a';
 export default node;
