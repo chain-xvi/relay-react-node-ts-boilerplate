@@ -33,7 +33,7 @@ function UsersList() {
 	);
 	const users = resp.getUsers;
 	return (
-		<div className={styles.usersList}>
+		<div className="usersList">
 			{
 				users.map(
 					function(user) {
