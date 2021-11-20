@@ -4,20 +4,22 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-	watch: true,
-	watchOptions: {
+  watch: true,
+  watchOptions: {
     ignored: /node_modules/,
   },
   entry: path.join(__dirname, "index.js"),
   output: {
-    path:path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'index.js',
+    publicPath: '/'
   },
   resolve: {
-	  extensions: ['*', '.js', '.jsx', '.ts', '.tsx']
-	},
+    extensions: ['*', '.js', '.jsx', '.ts', '.tsx']
+  },
   module: {
     rules: [
-    	{
+      {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: {
@@ -42,34 +44,19 @@ module.exports = {
         }
       },
       {
-				test: /\.(css)$/,
-				use: ['css-loader']
-			},
-			{
-			  test: /\.(s(a|c)ss)$/,
-			  use: [
-					{ loader: 'style-loader' },
-					{
-						loader: 'css-loader',
-						options: {
-							modules: {
-					      localIdentName: "[name]__[local]___[hash:base64:5]",
-					    },
-							sourceMap: false,
-						}
-					},
-					{
-						loader: 'sass-loader'
-					}
-				]
-			}
+        test: /\.(scss|css)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
     ]
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
-  	new HtmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       template: path.join(__dirname, "index.html"),
     }),
-		new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin(),
     new Dotenv(),
   ]
 }
