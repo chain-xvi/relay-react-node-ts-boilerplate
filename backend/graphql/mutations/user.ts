@@ -16,7 +16,7 @@ export const createUser = {
 		const {name} = args;
 		const data = await knex('users').returning('id').insert({name});
 		return {
-			id: toGlobalId('User', data[0]),
+			id: data[0],
 			name,
 		}
 	}
