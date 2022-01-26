@@ -75,7 +75,7 @@ DB_NAME=
 
 ### Frontend:
 ```
-API=http://localhost:3000/
+API=http://localhost:3000/graphql
 ```
 
 ## Database setup:
